@@ -36,7 +36,8 @@ def show_menu():
         print("What would you like to do : ")
         print("1. Enter Logs for Today.")
         print("2. View Logs History.")
-        print("3. Exit.")
+        print("3. Analysis")
+        print("4. Exit")
         print("\n")
 
         choice = int(input("Enter your choice(1/2/3) : "))
@@ -48,12 +49,44 @@ def show_menu():
             view_history()
 
         elif choice == 3:
-            break;
+            analysis()
+
+        elif choice == 4:
+            break
 
         else:
             print("Invalid Choice. Please Try again.")
         
         print("\n")
+
+def analysis():
+    try:
+        with open("Code_Tracker.csv", "r") as file:
+            reader = csv.reader(file)
+            next(reader)  # Skip header if present
+
+            total_lines = 0
+            line_counts = []  # Store lines of code for calculation
+            data_list = []
+            for row in reader:
+                date_object = datetime.datetime.strptime(row[0], "%d-%m-%Y")  # Convert date string to datetime
+                lines = int(row[1])  # Convert lines to integer
+                line_counts.append(lines)  # Store in list
+
+                data_list.append((date_object,lines))
+            best_day = max(data_list,key=lambda x : x[1])
+
+            total_lines = sum(line_counts)  # Calculate total lines
+            average_lines = total_lines / len(line_counts) if line_counts else 0  # Avoid division by zero
+
+            print(f"Total Lines of Code Written: {total_lines}")
+            print(f"Average Lines Per Day: {average_lines:.2f}")
+            print(f"Best Coding Day: {best_day[0].strftime('%d-%m-%Y')}")
+            print(f"Lines of Code Written on Best Day: {best_day[1]}")
+
+    except FileNotFoundError:
+        print("Error. No Coding History Found.\n")
+
 
 #Call main function
 
