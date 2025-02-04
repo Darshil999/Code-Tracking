@@ -1,12 +1,24 @@
+import tkinter as tk
+from starting import add_logs,view_history,analysis
 
-# current_date = datetime.datetime.now().strftime("%d-%m-%Y")
-# print(current_date)
+window = tk.Tk()
 
-# no_of_lines = int(input("Enter the number of lines you did today(Approximate) : "))
-# print(no_of_lines)
+window.title("Code Tracker")
 
-# with open("Code_Tracker.csv","a", newline="") as file:
-#     writer = csv.writer(file)
-#     writer.writerow([current_date,no_of_lines])
+window.geometry("700x600")
 
-# print("CSV file written successfully")
+
+label = tk.Label(window, text="Welcome to Code Tracker", font=("Arial", 16))
+
+# Pack the label into the window
+label.pack(pady=20)
+
+add_button = tk.Button(window, text="1️⃣ Enter Logs for Today", width=15, command=add_logs)
+add_button1 = tk.Button(window, text="1️⃣ Enter Logs for Today", width=15, command=add_logs)
+add_button2 = tk.Button(window, text="1️⃣ Enter Logs for Today", width=15, command=add_logs)
+add_button3 = tk.Button(window, text="1️⃣ Enter Logs for Today", width=15, command=add_logs)
+
+
+
+
+window.mainloop()
